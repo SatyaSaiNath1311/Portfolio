@@ -5,42 +5,73 @@ interface SkillCategory {
 
 const skillsData: SkillCategory[] = [
   {
-    category: 'Languages',
-    items: ['Python', 'SQL', 'JavaScript (basic)'],
+    category: 'Programming',
+    items: ['Python', 'SQL', 'JavaScript (Basic)'],
   },
   {
-    category: 'ML / AI',
+    category: 'CS Fundamentals',
     items: [
+      'Data Structures and Algorithms',
+      'OOP',
+      'SDLC',
+      'Agile',
+      'Unit Testing and Debugging',
+      'Operating Systems and Computer Networks (Basic)',
+    ],
+  },
+  {
+    category: 'ML and AI',
+    items: [
+      'Machine Learning',
       'Deep Learning',
       'NLP',
       'Supervised Learning',
       'Model Evaluation',
       'Hyperparameter Tuning',
+      'Scikit-learn',
       'TensorFlow',
       'PyTorch',
-      'Scikit-learn',
     ],
   },
   {
-    category: 'Agentic AI / LLM Systems',
+    category: 'Generative AI and LLMs',
     items: [
-      'Multi-Agent Architectures',
-      'Retrieval-Augmented Generation',
-      'Model Context Protocol',
+      'LLMs',
+      'Multi-Agent Systems',
+      'RAG',
+      'Model Context Protocol (MCP)',
       'LlamaIndex',
-      'HuggingFace Transformers',
+      'Hugging Face Transformers',
       'Prompt Engineering',
-      'Gemini API',
+      'Google Gemini API',
       'Groq API',
     ],
   },
   {
-    category: 'Data & Databases',
-    items: ['MongoDB', 'SQL', 'Data Cleaning', 'EDA', 'Feature Engineering'],
+    category: 'Data and Analytics',
+    items: [
+      'Data Cleaning',
+      'EDA',
+      'Feature Engineering',
+      'Data Preprocessing',
+      'Pandas',
+      'NumPy',
+    ],
   },
   {
-    category: 'Tools & Deployment',
-    items: ['Docker', 'Git', 'FastAPI', 'Linux', 'VS Code', 'JupyterLab'],
+    category: 'Databases and DevOps',
+    items: [
+      'SQL',
+      'MongoDB',
+      'Docker',
+      'Git',
+      'GitHub Actions (CI/CD)',
+      'REST API and Server-Side Design (FastMCP)',
+    ],
+  },
+  {
+    category: 'Tools',
+    items: ['Jupyter Notebook', 'VS Code', 'Linux', 'Microsoft Office'],
   },
 ]
 
@@ -70,7 +101,7 @@ export default function Skills() {
               key={group.category}
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'minmax(180px, 220px) 1fr',
+                gridTemplateColumns: 'minmax(200px, 260px) 1fr',
                 gap: '1.25rem',
                 alignItems: 'baseline',
                 paddingBottom: '1.25rem',

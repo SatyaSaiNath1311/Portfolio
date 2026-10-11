@@ -1,11 +1,11 @@
 /** Floating pill-shaped header — not full-width, centered island */
 export default function Header() {
   const navLinks = [
-    { label: 'Impact',    href: '#impact' },
-    { label: 'Journey',   href: '#journey' },
-    { label: 'Approach',  href: '#approach' },
-    { label: 'Work',      href: '#work' },
-    { label: 'Skills',    href: '#skills' },
+    { label: 'Experience', href: '#experience' },
+    { label: 'Work', href: '#work' },
+    { label: 'Skills', href: '#skills' },
+    { label: 'Certifications', href: '#certifications' },
+    { label: 'Journey', href: '#journey' },
   ]
 
   return (

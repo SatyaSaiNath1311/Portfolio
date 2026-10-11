@@ -132,7 +132,7 @@ export default function Hero() {
           {/* Status pill */}
           <div className="status-pill" style={{ marginBottom: '1.75rem', width: 'fit-content' }}>
             <span className="status-dot" aria-hidden="true" />
-            Teeparthi Satya Sai Nath · M.Tech CSE @ Amrita · Open to ML / Agentic AI roles
+            Teeparthi Satya Sai Nath · Bengaluru, Karnataka, India · Open to ML / AI Engineering roles
           </div>
 
           {/* Eyebrow Introduction */}
@@ -176,9 +176,7 @@ export default function Hero() {
               maxWidth: '52ch',
             }}
           >
-            M.Tech Computer Science researcher & engineer at Amrita School of Computing, working on applied
-            deep learning, agentic AI, and NLP security — a multi-agent bug detector, a
-            prompt-injection detector, and a medical imaging model that explains its own calls.
+            M.Tech Computer Science student building machine learning, deep learning, and multi-agent LLM systems with RAG. I like end-to-end ownership of projects, from data cleaning and model evaluation to deployable APIs. Looking for an internship or entry-level role in data, analytics, or AI engineering.
           </p>
 
           {/* Buttons */}
@@ -187,7 +185,7 @@ export default function Hero() {
               Explore the work &rarr;
             </a>
             <a
-              href="./resume.pdf"
+              href="/Portfolio/Teeparthi_Satya_Sai_Nath_Resume.pdf"
               download="Teeparthi_Satya_Sai_Nath_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
@@ -199,7 +197,7 @@ export default function Hero() {
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
-              Download resume
+              Download Resume
             </a>
           </div>
         </div>

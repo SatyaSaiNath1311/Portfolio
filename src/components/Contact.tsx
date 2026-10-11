@@ -98,7 +98,7 @@ export default function Contact() {
                   margin: '0.15rem 0 0',
                 }}
               >
-                M.Tech CSE · Amrita School of Computing
+                M.Tech CSE · Amrita School of Computing, Bengaluru
               </p>
               <p
                 style={{
@@ -121,7 +121,7 @@ export default function Contact() {
                     display: 'inline-block',
                   }}
                 />
-                Open to ML / Agentic AI roles
+                Bengaluru, Karnataka, India · Open to ML / AI roles
               </p>
             </div>
           </div>
@@ -136,8 +136,8 @@ export default function Contact() {
               margin: '0 0 1.75rem',
             }}
           >
-            👋 Hey! Whether you&apos;re hiring for ML or agentic AI roles, want to collaborate on a
-            project, or just want to talk about multi-agent systems, my inbox is open.
+            👋 Hey! Whether you&apos;re hiring for data, analytics, or AI engineering roles, want to collaborate on a
+            project, or just want to discuss multi-agent LLM systems, my inbox is open.
           </p>
 
           {/* Composer Form */}
@@ -356,7 +356,7 @@ export default function Contact() {
           </a>
 
           <a
-            href="./resume.pdf"
+            href="/Portfolio/Teeparthi_Satya_Sai_Nath_Resume.pdf"
             download="Teeparthi_Satya_Sai_Nath_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
@@ -369,7 +369,7 @@ export default function Contact() {
               <line x1="16" y1="17" x2="8" y2="17" />
               <polyline points="10 9 9 9 8 9" />
             </svg>
-            Resume.pdf
+            Download Resume
           </a>
         </div>
       </div>

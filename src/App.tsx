@@ -1,11 +1,13 @@
 import Header from './components/Header'
 import Hero from './components/Hero'
 import ToolsStrip from './components/ToolsStrip'
+import Experience from './components/Experience'
+import Work from './components/Work'
+import Skills from './components/Skills'
+import Certifications from './components/Certifications'
 import Impact from './components/Impact'
 import Journey from './components/Journey'
 import Approach from './components/Approach'
-import Work from './components/Work'
-import Skills from './components/Skills'
 import Notes from './components/Notes'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
@@ -24,11 +26,13 @@ export default function App() {
       <main>
         <Hero />
         <ToolsStrip />
+        <Experience />
+        <Work />
+        <Skills />
+        <Certifications />
         <Impact />
         <Journey />
         <Approach />
-        <Work />
-        <Skills />
         <Notes />
         <Contact />
       </main>

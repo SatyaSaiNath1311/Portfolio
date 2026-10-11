@@ -17,61 +17,62 @@ interface TimelineClip {
 
 const clips: TimelineClip[] = [
   {
-    title: 'B.Tech, Computer Science',
-    subtitle: 'Parul Institute of Engineering and Technology',
+    title: 'B.Tech, CSE',
+    subtitle: 'Parul Institute of Engineering and Technology, Vadodara',
     date: 'Dec 2021 – May 2025',
-    badge: 'CGPA 7.47 / 10.00',
+    badge: 'CGPA 7.47 / 10',
     color: '#60A5FA', // cool tone
     tintBg: 'rgba(30, 48, 77, 0.45)',
     borderColor: 'rgba(96, 165, 250, 0.35)',
     bullets: [
-      'Built classical ML projects: a matrix-factorization recommendation engine, adaptive hashing, and crop yield prediction with SHAP explainability',
-      'Built SkillSwap, a peer-to-peer skill-exchange platform (MERN stack) matching users with TF-IDF cosine similarity',
-      'Graduated with a CGPA of 7.47/10.00',
+      'Bachelor of Technology in Computer Science and Engineering, Parul Institute of Engineering and Technology, Vadodara',
+      'Built foundations in Data Structures and Algorithms, OOP, SDLC, Operating Systems, and Computer Networks',
+      'Developed hands-on predictive machine learning models, exploratory data analysis, and feature engineering workflows',
+      'Graduated with CGPA 7.47/10.00',
     ],
     waveBars: [40, 65, 30, 80, 50, 70, 45, 60],
   },
   {
-    title: 'Software & ML Intern',
-    subtitle: 'Edu-Versity, AMG Technologies',
-    date: 'Jan 2025 – Apr 2025',
-    color: '#A78BFA', // purple-ish tone
-    tintBg: 'rgba(54, 38, 86, 0.45)',
-    borderColor: 'rgba(167, 139, 250, 0.35)',
-    bullets: [
-      'Built and deployed predictive ML models in Python and scikit-learn',
-      'Ran feature engineering, preprocessing, and cross-validation pipelines',
-      'Reduced model error through hyperparameter tuning and ensemble methods, evaluated with RMSE, F1, and AUC',
-    ],
-    waveBars: [55, 75, 40, 90, 60, 45, 80, 50],
-  },
-  {
-    title: 'M.Tech, Computer Science',
+    title: 'M.Tech, CSE',
     subtitle: 'Amrita School of Computing, Bengaluru',
     date: 'Jul 2025 – Present',
-    badge: 'Current · CGPA 8.22 / 10.00',
-    color: '#E6A335', // marigold for current
-    tintBg: 'rgba(74, 52, 18, 0.55)',
-    borderColor: '#E6A335',
+    badge: 'CGPA 8.22 / 10',
+    color: '#2C8585', // teal
+    tintBg: 'rgba(23, 62, 62, 0.45)',
+    borderColor: '#2C8585',
     bullets: [
-      'Built OmniBug, a two-agent bug detection framework spanning 9+ languages',
-      'Built PromptGuard, a hybrid prompt-injection detector reaching 0.93 macro F1',
-      'Building SeverityNet, a CNN benchmarking framework for skin lesion severity grading, targeting IEEE Access',
+      'Master of Technology in Computer Science and Engineering, Amrita Vishwa Vidyapeetham, Bengaluru',
+      'Built OmniBug: a cascading dual-agent LLM bug detection pipeline spanning 9+ languages with FastMCP RAG and 10 bug categories',
+      'Built PromptGuard: a real-time prompt injection detection framework combining fine-tuned DistilBERT with regex heuristics (0.93 macro F1)',
       'Current CGPA: 8.22/10.00',
     ],
     waveBars: [70, 95, 60, 100, 85, 90, 75, 95],
+  },
+  {
+    title: 'AI Engineer Intern',
+    subtitle: 'Aligned Automation',
+    date: 'Jul 2026 – Oct 2026',
+    badge: 'Internship',
+    color: '#E6A335', // marigold
+    tintBg: 'rgba(74, 52, 18, 0.55)',
+    borderColor: '#E6A335',
+    bullets: [
+      'Contributed to the Bug Investigation Council, a multi-agent agentic AI pipeline that automates bug detection, root-cause investigation, and fix recommendation using coordinated LLM agents',
+      'Developed a domain-specific Small Language Model (SLM) for efficient, low-latency inference, covering data preparation, fine-tuning, and model evaluation',
+    ],
+    waveBars: [55, 75, 40, 90, 60, 45, 80, 50],
   },
   {
     title: 'Next chapter',
     subtitle: 'Open to new opportunities',
     date: 'Immediate / 2026',
     badge: 'Available',
-    color: '#2C8585', // teal
-    tintBg: 'rgba(23, 62, 62, 0.45)',
-    borderColor: 'rgba(44, 133, 133, 0.5)',
+    color: '#D9503A', // coral
+    tintBg: 'rgba(84, 30, 24, 0.45)',
+    borderColor: 'rgba(217, 80, 58, 0.5)',
     bullets: [
-      'Looking for roles in Machine Learning Engineering, Data Science, and Agentic AI / Systems Engineering',
-      'Open to new roles — could be yours.',
+      'Seeking an internship or entry-level role in data, analytics, or AI engineering',
+      'Passionate about end-to-end ownership of projects, from data cleaning and model evaluation to deployable APIs',
     ],
     waveBars: [45, 70, 85, 60, 75, 90, 65, 80],
   },

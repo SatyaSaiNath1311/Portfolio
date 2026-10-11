@@ -44,7 +44,7 @@ export default function Footer() {
                 margin: '0 0 0.75rem',
               }}
             >
-              Applied Deep Learning & Agentic AI Systems Engineer. M.Tech Computer Science student at Amrita School of Computing.
+              M.Tech Computer Science student building machine learning, deep learning, and multi-agent LLM systems with RAG. Bengaluru, Karnataka, India.
             </p>
             <div
               style={{
@@ -68,7 +68,7 @@ export default function Footer() {
                   background: '#2C8585',
                 }}
               />
-              Open to ML / AI Engineering roles & research collaborations
+              Open to Data, Analytics & AI Engineering roles
             </div>
           </div>
 
@@ -138,7 +138,7 @@ export default function Footer() {
                 GitHub &rarr;
               </a>
               <a
-                href="./resume.pdf"
+                href="/Portfolio/Teeparthi_Satya_Sai_Nath_Resume.pdf"
                 download="Teeparthi_Satya_Sai_Nath_Resume.pdf"
                 style={{
                   fontFamily: "'IBM Plex Sans', sans-serif",

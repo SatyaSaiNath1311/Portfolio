@@ -7,7 +7,7 @@ export default function ToolsStrip() {
     'Docker',
     'MongoDB',
     'Git',
-    'FastAPI',
+    'FastMCP',
   ]
 
   return (
