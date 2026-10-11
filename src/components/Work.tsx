@@ -84,7 +84,7 @@ function SeverityNetChips() {
 
 // ─── Project Data ────────────────────────────────────────────────────────────
 
-const featuredProjects = [
+const projects = [
   {
     name: 'OmniBug',
     subtitle: 'Agentic Multi-Language Bug Detection Framework (2026)',
@@ -105,15 +105,13 @@ const featuredProjects = [
     link: 'https://github.com/SatyaSaiNath1311/PromptGuard',
     Infographic: PromptGuardRing,
   },
-]
-
-const extraProjects = [
   {
     name: 'SeverityNet',
     subtitle: 'CNN Benchmarking Framework for Skin Lesion Severity Grading',
     accent: '#2C8585',
     metric: '4 architectures benchmarked',
-    body: "An ongoing research project benchmarking EfficientNet-B2, ResNet50, ConvNeXt-Tiny, and DenseNet121 on DermaMNIST for skin lesion severity grading, with two-stage fine-tuning, focal loss, and class-balancing techniques. Includes extensive ablation studies, k-fold cross-validation, and Grad-CAM explainability so predictions can actually be inspected, not just trusted. Being written up for submission to IEEE Access. There's also a small Gradio demo app.",
+    body: "An ongoing research project benchmarking EfficientNet-B2, ResNet50, ConvNeXt-Tiny, and DenseNet121 on DermaMNIST for skin lesion severity grading, with two-stage fine-tuning, focal loss, and class-balancing techniques. Includes extensive ablation studies, k-fold cross-validation, and Grad-CAM explainability so predictions can actually be inspected, not just trusted. There's also a small Gradio demo app.",
+    tags: ['PyTorch', 'Computer Vision', 'Grad-CAM', 'Gradio'],
     link: 'https://github.com/SatyaSaiNath1311/SeverityNet',
     Infographic: SeverityNetChips,
   },
@@ -132,7 +130,7 @@ export default function Work() {
     const onScroll = () => {
       const scrollPos = el.scrollLeft
       const cardWidth = el.firstElementChild ? (el.firstElementChild as HTMLElement).offsetWidth : 380
-      const idx = Math.min(featuredProjects.length - 1, Math.max(0, Math.round(scrollPos / cardWidth)))
+      const idx = Math.min(projects.length - 1, Math.max(0, Math.round(scrollPos / cardWidth)))
       setActiveSlide(idx)
     }
 
@@ -244,7 +242,7 @@ export default function Work() {
             outline: 'none',
           }}
         >
-          {featuredProjects.map((proj) => {
+          {projects.map((proj) => {
             const Info = proj.Infographic
             return (
               <article
@@ -376,7 +374,7 @@ export default function Work() {
           }}
           aria-label="Carousel pagination"
         >
-          {featuredProjects.map((proj, idx) => (
+          {projects.map((proj, idx) => (
             <button
               key={proj.name}
               type="button"
@@ -394,141 +392,6 @@ export default function Work() {
               }}
             />
           ))}
-        </div>
-
-        {/* ── Smaller "More work" row below featured projects ── */}
-        <div style={{ marginTop: '3.5rem' }}>
-          <div style={{ marginBottom: '1.25rem' }}>
-            <p
-              style={{
-                fontFamily: "'IBM Plex Mono', monospace",
-                fontSize: '0.8125rem',
-                fontWeight: 600,
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                color: 'var(--ink-meta)',
-                margin: '0 0 0.35rem',
-              }}
-            >
-              // MORE WORK
-            </p>
-            <h3
-              style={{
-                fontFamily: "'Fraunces', serif",
-                fontSize: 'clamp(1.3rem, 2.5vw, 1.5rem)',
-                fontWeight: 600,
-                color: 'var(--ink-primary)',
-                margin: 0,
-              }}
-            >
-              Additional research &amp; benchmarking
-            </h3>
-          </div>
-
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 480px), 1fr))',
-              gap: '1.5rem',
-            }}
-          >
-            {extraProjects.map((proj) => {
-              const Info = proj.Infographic
-              return (
-                <article
-                  key={proj.name}
-                  style={{
-                    background: '#fff',
-                    borderRadius: '1rem',
-                    border: '1px solid rgba(20, 22, 26, 0.08)',
-                    borderLeft: `4px solid ${proj.accent}`,
-                    padding: 'clamp(1.25rem, 3vw, 2rem)',
-                    boxShadow: '0 2px 14px rgba(0, 0, 0, 0.035)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '1rem',
-                  }}
-                >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.75rem' }}>
-                    <div>
-                      <h4
-                        style={{
-                          fontFamily: "'Fraunces', serif",
-                          fontSize: '1.35rem',
-                          fontWeight: 600,
-                          color: 'var(--ink-primary)',
-                          margin: '0 0 0.25rem',
-                        }}
-                      >
-                        {proj.name}
-                      </h4>
-                      <p
-                        style={{
-                          fontFamily: "'IBM Plex Sans', sans-serif",
-                          fontSize: '0.875rem',
-                          color: 'var(--ink-secondary)',
-                          margin: 0,
-                        }}
-                      >
-                        {proj.subtitle}
-                      </p>
-                    </div>
-
-                    <span
-                      style={{
-                        fontFamily: "'IBM Plex Mono', monospace",
-                        fontSize: '0.8125rem',
-                        fontWeight: 600,
-                        color: proj.accent,
-                        background: 'rgba(44, 133, 133, 0.08)',
-                        border: '1px solid rgba(44, 133, 133, 0.22)',
-                        borderRadius: '4px',
-                        padding: '0.25rem 0.6rem',
-                      }}
-                    >
-                      {proj.metric}
-                    </span>
-                  </div>
-
-                  <Info />
-
-                  <p
-                    style={{
-                      fontFamily: "'IBM Plex Sans', sans-serif",
-                      fontSize: '0.9375rem',
-                      lineHeight: 1.68,
-                      color: 'var(--ink-secondary)',
-                      margin: 0,
-                    }}
-                  >
-                    {proj.body}
-                  </p>
-
-                  <div style={{ marginTop: 'auto', paddingTop: '0.5rem' }}>
-                    <a
-                      href={proj.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="contact-pill"
-                      style={{
-                        display: 'inline-flex',
-                        padding: '0.5rem 1rem',
-                        minHeight: '44px',
-                        minWidth: '44px',
-                        fontSize: '0.875rem',
-                        fontWeight: 500,
-                      }}
-                    >
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-                      </svg>
-                      View on GitHub
-                    </a>
-                  </div>
-                </article>
-              )
-            })}
-          </div>
         </div>
       </div>
     </section>

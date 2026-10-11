@@ -45,7 +45,7 @@ const notes: NoteData[] = [
     rotate: -1.4,
   },
   {
-    text: 'Benchmarking 4 CNN architectures for skin lesion severity, targeting IEEE Access.',
+    text: 'Benchmarking 4 CNN architectures for skin lesion severity.',
     tag: 'SeverityNet',
     bg: '#DCFCE7', // soft mint green
     border: '#4ADE80',
