@@ -1,7 +1,9 @@
+import { lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
-import photoCutout from '../assets/photo_cutout.png'
-import HeroCanvas from './canvas/HeroCanvas'
+import photoCutout from '../assets/photo_cutout.webp'
 import { useReducedMotion } from '../hooks/useReducedMotion'
+
+const HeroCanvas = lazy(() => import('./canvas/HeroCanvas'))
 
 // ─── Floating role tag with directional pointer arrow ─────────────────────────
 
@@ -10,6 +12,7 @@ interface TagProps {
   style: React.CSSProperties
   delay: number
   reducedMotion: boolean
+  className?: string
   arrowDirection?: 'left' | 'right' | 'top'
   arrowColor?: string
 }
@@ -19,12 +22,13 @@ function FloatingTag({
   style,
   delay,
   reducedMotion,
+  className = '',
   arrowDirection = 'left',
   arrowColor,
 }: TagProps) {
   return (
     <motion.div
-      className="float-tag"
+      className={`float-tag ${className}`}
       style={{
         ...style,
         display: 'inline-flex',
@@ -105,15 +109,17 @@ export default function Hero() {
       aria-label="Introduction"
       style={{
         position: 'relative',
-        minHeight: 'calc(100vh - 72px)',
+        minHeight: 'calc(100dvh - 72px)',
         display: 'flex',
         alignItems: 'center',
-        padding: '3rem 0 0',
+        padding: '2.5rem 0 0',
         overflow: 'hidden',
       }}
     >
       {/* ── Local 3D canvas (behind everything, clipped to hero) ── */}
-      <HeroCanvas />
+      <Suspense fallback={null}>
+        <HeroCanvas />
+      </Suspense>
 
       <div
         className="container"
@@ -128,11 +134,11 @@ export default function Hero() {
         }}
       >
         {/* ── Left: text zone ─────────────────────────────────────────── */}
-        <div style={{ flex: 1.1, minWidth: 0, paddingBottom: 'clamp(3rem, 6vw, 5rem)' }}>
+        <div style={{ flex: 1.1, minWidth: 0, paddingBottom: 'clamp(2rem, 5vw, 5rem)' }}>
           {/* Status pill */}
-          <div className="status-pill" style={{ marginBottom: '1.75rem', width: 'fit-content' }}>
+          <div className="status-pill" style={{ marginBottom: '1.5rem', width: 'fit-content' }}>
             <span className="status-dot" aria-hidden="true" />
-            Teeparthi Satya Sai Nath · Bengaluru, Karnataka, India · Open to ML / AI Engineering roles
+            <span>Teeparthi Satya Sai Nath · Bengaluru, Karnataka, India</span>
           </div>
 
           {/* Eyebrow Introduction */}
@@ -153,16 +159,16 @@ export default function Hero() {
           <h1
             style={{
               fontFamily: "'Fraunces', serif",
-              fontSize: 'clamp(2.5rem, 5.2vw, 4.25rem)',
+              fontSize: 'clamp(2.25rem, 5vw, 4.25rem)',
               fontWeight: 600,
-              lineHeight: 1.08,
+              lineHeight: 1.1,
               letterSpacing: '-0.025em',
               color: 'var(--ink-primary)',
               margin: '0 0 1.5rem',
             }}
           >
             I build systems that{' '}
-            <span className="gradient-text">catch what shouldn't&nbsp;be there</span>.
+            <span className="gradient-text">catch what shouldn&apos;t&nbsp;be there</span>.
           </h1>
 
           {/* Paragraph */}
@@ -181,7 +187,7 @@ export default function Hero() {
 
           {/* Buttons */}
           <div style={{ display: 'flex', gap: '0.875rem', flexWrap: 'wrap' }}>
-            <a href="#work" className="btn-primary">
+            <a href="#work" className="btn-primary" style={{ minHeight: '44px', minWidth: '44px' }}>
               Explore the work &rarr;
             </a>
             <a
@@ -191,6 +197,7 @@ export default function Hero() {
               rel="noopener noreferrer"
               className="btn-secondary"
               aria-label="Download resume PDF"
+              style={{ minHeight: '44px', minWidth: '44px' }}
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -207,7 +214,8 @@ export default function Hero() {
           style={{
             position: 'relative',
             flexShrink: 0,
-            width: 'clamp(360px, 42vw, 560px)',
+            width: 'clamp(260px, 42vw, 560px)',
+            maxWidth: '100%',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'flex-end',
@@ -216,9 +224,10 @@ export default function Hero() {
           }}
           aria-label="Portrait photo with role labels"
         >
-          {/* Floating tag 1: AI Engineer (top-right, points left toward portrait) */}
+          {/* Floating tag 1: AI Engineer */}
           <FloatingTag
             label="AI Engineer"
+            className="hero-tag-1"
             arrowDirection="left"
             arrowColor="#E6A335"
             reducedMotion={reducedMotion}
@@ -226,16 +235,17 @@ export default function Hero() {
             style={{
               position: 'absolute',
               top: '14%',
-              right: '-4px',
+              right: '0px',
               background: '#FFF8E6',
               border: '1px solid #E6A335',
               color: '#7D5215',
             }}
           />
 
-          {/* Floating tag 2: ML Researcher (mid-left, points right toward portrait) */}
+          {/* Floating tag 2: ML Researcher */}
           <FloatingTag
             label="ML Researcher"
+            className="hero-tag-2"
             arrowDirection="right"
             arrowColor="#2C8585"
             reducedMotion={reducedMotion}
@@ -243,16 +253,17 @@ export default function Hero() {
             style={{
               position: 'absolute',
               top: '48%',
-              left: '-20px',
+              left: '0px',
               background: '#EAF4F4',
               border: '1px solid #2C8585',
               color: '#1A5555',
             }}
           />
 
-          {/* Floating tag 3: Systems Builder (lower-right, points left toward portrait) */}
+          {/* Floating tag 3: Systems Builder */}
           <FloatingTag
             label="Systems Builder"
+            className="hero-tag-3"
             arrowDirection="left"
             arrowColor="#D9503A"
             reducedMotion={reducedMotion}
@@ -260,14 +271,14 @@ export default function Hero() {
             style={{
               position: 'absolute',
               bottom: '22%',
-              right: '-10px',
+              right: '0px',
               background: '#FBEEEC',
               border: '1px solid #D9503A',
               color: '#7C2418',
             }}
           />
 
-          {/* Cutout Portrait Image — crisp, solid, zero white fade */}
+          {/* Cutout Portrait Image — crisp, fluid scaling, never crops face */}
           <div
             style={{
               position: 'relative',
@@ -280,9 +291,14 @@ export default function Hero() {
             <img
               src={photoCutout}
               alt="Teeparthi Satya Sai Nath"
+              width="1254"
+              height="1254"
+              fetchPriority="high"
+              decoding="async"
               style={{
                 width: '100%',
-                maxHeight: 'min(640px, 82vh)',
+                maxWidth: '100%',
+                maxHeight: 'min(640px, 75dvh)',
                 objectFit: 'contain',
                 objectPosition: 'bottom center',
                 display: 'block',
@@ -295,7 +311,7 @@ export default function Hero() {
       {/* ── Mobile responsiveness ────────────────────────────────────── */}
       <style>{`
         @media (max-width: 860px) {
-          #hero { padding-top: 2rem; }
+          #hero { padding-top: 1.5rem; }
           #hero .container {
             flex-direction: column !important;
             align-items: center !important;
@@ -307,8 +323,13 @@ export default function Hero() {
           }
           #hero .container > div:last-child {
             width: 100% !important;
-            max-width: 340px !important;
+            max-width: min(100%, 360px) !important;
           }
+        }
+        @media (max-width: 480px) {
+          .hero-tag-1 { top: 6% !important; right: 0 !important; font-size: 0.75rem !important; padding: 0.3rem 0.65rem !important; }
+          .hero-tag-2 { top: 45% !important; left: 0 !important; font-size: 0.75rem !important; padding: 0.3rem 0.65rem !important; }
+          .hero-tag-3 { bottom: 16% !important; right: 0 !important; font-size: 0.75rem !important; padding: 0.3rem 0.65rem !important; }
         }
       `}</style>
     </section>

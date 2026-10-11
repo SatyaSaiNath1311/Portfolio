@@ -125,15 +125,15 @@ export default function Journey() {
       className="section"
       style={{
         position: 'relative',
-        minHeight: '260vh', // scrollable track for the timeline scrub
-        padding: '6rem 0',
+        minHeight: 'clamp(200dvh, 230dvh, 260dvh)', // scrollable track for the timeline scrub
+        padding: 'clamp(4rem, 8vw, 6rem) 0',
       }}
     >
       {/* Sticky container that remains pinned while scrolling through Journey */}
       <div
         style={{
           position: 'sticky',
-          top: '5rem',
+          top: 'clamp(4.25rem, 8dvh, 5.5rem)',
           zIndex: 10,
         }}
       >
@@ -202,9 +202,11 @@ export default function Journey() {
             {/* Main Content Area: Active Clip Details */}
             <div
               style={{
-                padding: 'clamp(1.75rem, 3.5vw, 2.75rem)',
+                padding: 'clamp(1.25rem, 3vw, 2.5rem)',
                 background: 'rgba(15, 18, 25, 0.95)',
-                minHeight: '220px',
+                minHeight: '200px',
+                maxHeight: 'min(420px, 46dvh)',
+                overflowY: 'auto',
               }}
             >
               <div
@@ -346,13 +348,7 @@ export default function Journey() {
               </div>
 
               {/* 4 Clickable Clip Blocks */}
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(4, 1fr)',
-                  gap: '0.75rem',
-                }}
-              >
+              <div className="journey-clips-grid">
                 {clips.map((clip, idx) => {
                   const isActive = activeIdx === idx
                   return (

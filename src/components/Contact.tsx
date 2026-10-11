@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import photo from '../assets/photo.jpg'
+import photo from '../assets/photo.webp'
 
 export default function Contact() {
   const [name, setName] = useState('')
@@ -70,6 +70,10 @@ export default function Contact() {
             <img
               src={photo}
               alt="Satya avatar"
+              loading="lazy"
+              decoding="async"
+              width="46"
+              height="46"
               style={{
                 width: '46px',
                 height: '46px',

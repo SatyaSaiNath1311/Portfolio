@@ -1,4 +1,4 @@
-import { useRef, useCallback } from 'react'
+import { useRef, useCallback, useState, useEffect } from 'react'
 
 // ─── Infographic Sub-components ─────────────────────────────────────────────
 
@@ -122,11 +122,38 @@ const extraProjects = [
 export default function Work() {
   const trackRef = useRef<HTMLDivElement>(null)
   const dragState = useRef({ active: false, startX: 0, scrollLeft: 0 })
+  const [activeSlide, setActiveSlide] = useState(0)
+
+  // Track scroll position to update dots
+  useEffect(() => {
+    const el = trackRef.current
+    if (!el) return
+
+    const onScroll = () => {
+      const scrollPos = el.scrollLeft
+      const cardWidth = el.firstElementChild ? (el.firstElementChild as HTMLElement).offsetWidth : 380
+      const idx = Math.min(featuredProjects.length - 1, Math.max(0, Math.round(scrollPos / cardWidth)))
+      setActiveSlide(idx)
+    }
+
+    el.addEventListener('scroll', onScroll, { passive: true })
+    return () => el.removeEventListener('scroll', onScroll)
+  }, [])
+
+  const scrollToSlide = (idx: number) => {
+    if (!trackRef.current) return
+    const card = trackRef.current.children[idx] as HTMLElement
+    if (card) {
+      card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
+      setActiveSlide(idx)
+    }
+  }
 
   const scrollByAmount = useCallback((direction: 'left' | 'right') => {
     if (!trackRef.current) return
-    const cardWidth = 420
-    const gap = 24
+    const firstCard = trackRef.current.firstElementChild as HTMLElement
+    const cardWidth = firstCard ? firstCard.offsetWidth : 380
+    const gap = 20
     const step = cardWidth + gap
     trackRef.current.scrollBy({ left: direction === 'right' ? step : -step, behavior: 'smooth' })
   }, [])
@@ -166,7 +193,7 @@ export default function Work() {
           <div>
             <p className="eyebrow">// SELECTED WORK</p>
             <h2 className="section-title" style={{ margin: 0 }}>
-              Projects that <span className="gradient-text">scale & defend</span>.
+              Projects that <span className="gradient-text">scale &amp; defend</span>.
             </h2>
           </div>
 
@@ -176,6 +203,7 @@ export default function Work() {
               className="btn-carousel"
               onClick={() => scrollByAmount('left')}
               aria-label="Scroll projects left"
+              style={{ minHeight: '44px', minWidth: '44px' }}
             >
               <svg viewBox="0 0 24 24" fill="none" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <polyline points="15 18 9 12 15 6" />
@@ -186,6 +214,7 @@ export default function Work() {
               className="btn-carousel"
               onClick={() => scrollByAmount('right')}
               aria-label="Scroll projects right"
+              style={{ minHeight: '44px', minWidth: '44px' }}
             >
               <svg viewBox="0 0 24 24" fill="none" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <polyline points="9 18 15 12 9 6" />
@@ -206,9 +235,11 @@ export default function Work() {
           aria-label="Featured projects carousel"
           style={{
             display: 'flex',
-            gap: '1.5rem',
+            gap: '1.25rem',
             overflowX: 'auto',
             scrollSnapType: 'x mandatory',
+            WebkitOverflowScrolling: 'touch',
+            touchAction: 'pan-y',
             paddingBottom: '1rem',
             outline: 'none',
           }}
@@ -220,7 +251,8 @@ export default function Work() {
                 key={proj.name}
                 className="project-card"
                 style={{
-                  width: 'clamp(320px, 44vw, 540px)',
+                  width: 'clamp(280px, 84vw, 540px)',
+                  maxWidth: '100%',
                   borderTop: `4px solid ${proj.accent}`,
                   display: 'flex',
                   flexDirection: 'column',
@@ -234,7 +266,7 @@ export default function Work() {
                     <h3
                       style={{
                         fontFamily: "'Fraunces', serif",
-                        fontSize: '1.625rem',
+                        fontSize: 'clamp(1.35rem, 3vw, 1.625rem)',
                         fontWeight: 600,
                         color: 'var(--ink-primary)',
                         margin: '0 0 0.35rem',
@@ -314,7 +346,9 @@ export default function Work() {
                       className="contact-pill"
                       style={{
                         display: 'inline-flex',
-                        padding: '0.45rem 1rem',
+                        padding: '0.5rem 1.125rem',
+                        minHeight: '44px',
+                        minWidth: '44px',
                         fontSize: '0.9375rem',
                         fontWeight: 500,
                       }}
@@ -329,6 +363,37 @@ export default function Work() {
               </article>
             )
           })}
+        </div>
+
+        {/* Visible Pagination Dots Fallback for Touch & Keyboard */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '0.625rem',
+            marginTop: '1rem',
+          }}
+          aria-label="Carousel pagination"
+        >
+          {featuredProjects.map((proj, idx) => (
+            <button
+              key={proj.name}
+              type="button"
+              onClick={() => scrollToSlide(idx)}
+              aria-label={`Go to slide ${idx + 1}: ${proj.name}`}
+              style={{
+                width: activeSlide === idx ? '28px' : '12px',
+                height: '12px',
+                borderRadius: '9999px',
+                background: activeSlide === idx ? proj.accent : 'rgba(20, 22, 26, 0.22)',
+                border: 'none',
+                padding: 0,
+                cursor: 'pointer',
+                transition: 'all 0.25s ease',
+              }}
+            />
+          ))}
         </div>
 
         {/* ── Smaller "More work" row below featured projects ── */}
@@ -350,7 +415,7 @@ export default function Work() {
             <h3
               style={{
                 fontFamily: "'Fraunces', serif",
-                fontSize: '1.5rem',
+                fontSize: 'clamp(1.3rem, 2.5vw, 1.5rem)',
                 fontWeight: 600,
                 color: 'var(--ink-primary)',
                 margin: 0,
@@ -363,7 +428,7 @@ export default function Work() {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 540px), 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 480px), 1fr))',
               gap: '1.5rem',
             }}
           >
@@ -377,7 +442,7 @@ export default function Work() {
                     borderRadius: '1rem',
                     border: '1px solid rgba(20, 22, 26, 0.08)',
                     borderLeft: `4px solid ${proj.accent}`,
-                    padding: 'clamp(1.5rem, 3vw, 2rem)',
+                    padding: 'clamp(1.25rem, 3vw, 2rem)',
                     boxShadow: '0 2px 14px rgba(0, 0, 0, 0.035)',
                     display: 'flex',
                     flexDirection: 'column',
@@ -447,7 +512,9 @@ export default function Work() {
                       className="contact-pill"
                       style={{
                         display: 'inline-flex',
-                        padding: '0.4rem 0.9rem',
+                        padding: '0.5rem 1rem',
+                        minHeight: '44px',
+                        minWidth: '44px',
                         fontSize: '0.875rem',
                         fontWeight: 500,
                       }}

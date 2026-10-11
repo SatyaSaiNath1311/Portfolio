@@ -77,9 +77,10 @@ body {
 .container {
   max-width: min(1500px, 92vw);
   margin: 0 auto;
-  padding: 0 clamp(1.5rem, 3.5vw, 3.5rem);
+  padding-left: max(clamp(1rem, 3.5vw, 3.5rem), env(safe-area-inset-left, 0px));
+  padding-right: max(clamp(1rem, 3.5vw, 3.5rem), env(safe-area-inset-right, 0px));
 }
-.section { padding: 6.5rem 0; }
+.section { padding: clamp(3.75rem, 7vw, 6.5rem) 0; }
 
 /* ─── Typography System ─────────────────────────────────────────────────────── */
 .eyebrow {
@@ -156,8 +157,17 @@ body {
   z-index: 50;
   display: flex;
   justify-content: center;
-  padding: 1rem 1.5rem;
+  padding: max(0.75rem, env(safe-area-inset-top, 0px)) 1rem;
   pointer-events: none;     /* padding area passes clicks through */
+}
+.desktop-nav {
+  display: flex;
+}
+.mobile-header-bar {
+  display: none;
+}
+.mobile-nav-overlay {
+  display: none;
 }
 .floating-nav {
   pointer-events: auto;
@@ -193,7 +203,6 @@ body {
   transition: color 0.15s, background 0.15s;
   white-space: nowrap;
 }
-.nav-link:hover { color: var(--ink-primary); background: rgba(20,22,26,0.06); }
 .btn-get-in-touch {
   display: inline-flex;
   align-items: center;
@@ -208,8 +217,8 @@ body {
   transition: opacity 0.15s;
   margin-left: 0.25rem;
   flex-shrink: 0;
+  min-height: 44px;
 }
-.btn-get-in-touch:hover { opacity: 0.8; }
 
 /* ─── Hero buttons ────────────────────────────────────────────────────────────── */
 .btn-primary {
@@ -509,15 +518,133 @@ body {
   html { scroll-behavior: auto; }
 }
 
-/* ─── Mobile ─────────────────────────────────────────────────────────────────── */
+/* ─── Journey Clips Grid ─────────────────────────────────────────────────────── */
+.journey-clips-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+/* ─── Tap Target Minimums ────────────────────────────────────────────────────── */
+.btn-primary,
+.btn-secondary,
+.contact-pill,
+.btn-carousel,
+.btn-send,
+.btn-hamburger {
+  min-height: 44px;
+  box-sizing: border-box;
+}
+
+/* ─── Hover-only rules for fine pointer devices ──────────────────────────────── */
+@media (hover: hover) and (pointer: fine) {
+  .nav-link:hover { color: var(--ink-primary); background: rgba(20,22,26,0.06); }
+  .btn-get-in-touch:hover { opacity: 0.8; }
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-secondary:hover { border-color: rgba(20,22,26,0.45); background: rgba(20,22,26,0.03); }
+  .btn-carousel:hover { background: rgba(20,22,26,0.06); border-color: rgba(20,22,26,0.25); }
+  .skill-tag:hover { background: rgba(20,22,26,0.09); border-color: rgba(20,22,26,0.18); }
+  .contact-pill:hover { background: rgba(20,22,26,0.10); }
+  .btn-send:hover { opacity: 0.88; }
+  .btn-hamburger:hover { background: rgba(20, 22, 26, 0.10); }
+}
+
+/* ─── Mobile Overrides (< 768px) ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .container { padding: 0 1.25rem; }
-  .section { padding: 5rem 0; }
-  .floating-nav .nav-link { display: none; }  /* hide center links on mobile */
-  .float-tag { display: none; }               /* hide floating tags on small screens */
+  .desktop-nav { display: none !important; }
+  .mobile-header-bar {
+    display: flex !important;
+    pointer-events: auto;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: min(100%, 640px);
+    background: rgba(246, 246, 242, 0.94);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-radius: 9999px;
+    padding: 0.35rem 0.5rem 0.35rem 1.125rem;
+    border: 1px solid rgba(20, 22, 26, 0.09);
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.07), 0 1px 4px rgba(0, 0, 0, 0.04);
+  }
+  .btn-hamburger {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 50%;
+    color: var(--ink-primary);
+    background: rgba(20, 22, 26, 0.05);
+    border: 1px solid rgba(20, 22, 26, 0.08);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .mobile-nav-overlay {
+    display: flex !important;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(246, 246, 242, 0.98);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    flex-direction: column;
+    padding: max(1.25rem, env(safe-area-inset-top, 0px)) 1.5rem max(1.75rem, env(safe-area-inset-bottom, 0px));
+    overflow-y: auto;
+    animation: fadeIn 0.2s ease-out;
+  }
+  .mobile-overlay-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid rgba(20, 22, 26, 0.08);
+  }
+  .mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1.75rem 0;
+    flex: 1;
+    justify-content: center;
+  }
+  .mobile-nav-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Fraunces', serif;
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: var(--ink-primary);
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    min-height: 48px;
+    border-radius: 0.75rem;
+    transition: background 0.15s;
+  }
+  .mobile-nav-item:active {
+    background: rgba(20, 22, 26, 0.06);
+  }
+  .mobile-nav-arrow {
+    color: var(--c-teal);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.15rem;
+  }
+  .journey-clips-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem !important;
+  }
 }
 @media (max-width: 480px) {
   body { background-size: 22px 22px; }
+  .mobile-nav-item { font-size: 1.25rem; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes spin {

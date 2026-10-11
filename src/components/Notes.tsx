@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 
@@ -59,6 +59,11 @@ const notes: NoteData[] = [
 export default function Notes() {
   const containerRef = useRef<HTMLDivElement>(null)
   const reducedMotion = useReducedMotion()
+  const [isTouch, setIsTouch] = useState(false)
+
+  useEffect(() => {
+    setIsTouch('ontouchstart' in window || navigator.maxTouchPoints > 0)
+  }, [])
 
   return (
     <section id="notes" aria-label="Quick notes and trivia" className="section">
@@ -68,7 +73,7 @@ export default function Notes() {
           Worth knowing <span className="gradient-text">at a glance</span>.
         </h2>
         <p className="section-sub">
-          A few facts about the work. Drag them around.
+          {isTouch ? 'Key takeaways from across the projects.' : 'A few facts about the work. Drag them around.'}
         </p>
 
         {/* Drag boundary arena */}
@@ -77,14 +82,14 @@ export default function Notes() {
           style={{
             position: 'relative',
             marginTop: '2.5rem',
-            padding: '2.5rem 1.5rem',
+            padding: 'clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 2vw, 1.5rem)',
             borderRadius: '1.25rem',
             border: '1px dashed rgba(20, 22, 26, 0.15)',
             background: 'rgba(246, 246, 242, 0.5)',
-            minHeight: '340px',
+            minHeight: '280px',
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-            gap: '2rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
+            gap: '1.5rem',
             alignItems: 'start',
             overflow: 'visible',
           }}
@@ -92,7 +97,7 @@ export default function Notes() {
           {notes.map((note, idx) => (
             <motion.div
               key={idx}
-              drag={!reducedMotion}
+              drag={!reducedMotion && !isTouch}
               dragConstraints={containerRef}
               dragElastic={0.08}
               whileDrag={{
@@ -109,11 +114,12 @@ export default function Notes() {
               style={{
                 background: note.bg,
                 border: `1px solid ${note.border}`,
-                rotate: `${note.rotate}deg`,
-                minHeight: '170px',
+                rotate: isTouch ? '0deg' : `${note.rotate}deg`,
+                minHeight: '160px',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
+                touchAction: isTouch ? 'pan-y' : 'auto',
               }}
               tabIndex={0}
               aria-label={`Note: ${note.text}`}
@@ -140,7 +146,7 @@ export default function Notes() {
               <p
                 style={{
                   fontFamily: "'IBM Plex Sans', sans-serif",
-                  fontSize: '1.0625rem',
+                  fontSize: '1rem',
                   fontWeight: 500,
                   lineHeight: 1.6,
                   color: note.textColor,

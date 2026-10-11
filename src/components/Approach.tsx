@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import approachDiagram from '../assets/approach_diagram.png'
+import approachDiagram from '../assets/approach_diagram.webp'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 
 export default function Approach() {
@@ -115,6 +115,10 @@ export default function Approach() {
             <img
               src={approachDiagram}
               alt="Neural network architecture and explainable AI pipeline diagram"
+              loading="lazy"
+              decoding="async"
+              width="1024"
+              height="768"
               style={{
                 width: '100%',
                 maxWidth: '560px',
